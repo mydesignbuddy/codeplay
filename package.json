@@ -1,0 +1,24 @@
+{
+  "name": "codeplay",
+  "version": "0.0.0",
+  "description": "codeplay",
+  "main": "index.js",
+  "dependencies": {
+    "brace": "^0.3.0",
+    "node-static": "^0.7.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mydesignbuddy/codeplay.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mydesignbuddy/codeplay/issues"
+  },
+  "homepage": "https://github.com/mydesignbuddy/codeplay"
+}

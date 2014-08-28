@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CodePlay - Learn Programming in a Playful Way</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/mode-javascript.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/theme-monokai.js"></script>
+</head>
+<body>
+    
+<canvas id="stage" width="640" height="480">Your Browser does not support HTML5 Canvas. Please Upgrade!</canvas>
+    
+<div id="editor">var centerX = canvas.width / 2;
+var centerY = canvas.height / 2;
+var radius = 70;
+
+drawCircle(centerX, centerY, radius, 'green', 'red');
+
+drawCircle(110, 110, 100, 'red', 'blue');
+
+function drawCircle(x, y, r, fill, stroke){
+    brush.beginPath();
+    brush.arc(x, y, r, 0, 2 * Math.PI, false);
+    brush.fillStyle = fill;
+    brush.fill();
+    brush.lineWidth = 5;
+    brush.strokeStyle = stroke;
+    brush.stroke(); 
+}</div>
+<script>
+var canvas = document.getElementById('stage');
+var brush = canvas.getContext('2d');
+
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+    editor.getSession().setUseWrapMode(true);
+    editor.getSession().setUseSoftTabs(true);
+    
+    eval(editor.getValue());
+    
+    editor.getSession().on('change', function(e) {
+      // e.type, etc
+      try {
+        brush.clearRect(0,0,canvas.width,canvas.height);
+        eval(editor.getValue());
+      } catch(e){
+          //something
+      }
+    });
+</script>
+</body>
+</html>
