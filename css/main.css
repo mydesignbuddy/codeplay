@@ -1,4 +1,7 @@
-#stage {
+body{
+    margin-top:70px;
+}    
+    #stage {
     background-color:#000;
 }
 #editor { 
