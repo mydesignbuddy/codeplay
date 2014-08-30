@@ -1,11 +1,11 @@
 body{
     margin-top:70px;
 }    
-    #stage {
-    background-color:#000;
-}
+#stage {
+   /*background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIUlEQVQYV2PctWvXfwYiACNIoZubGyMhtaMK8YYQ0cEDAHZmJzg/WE2FAAAAAElFTkSuQmCC) repeat;
+*/}
 #editor { 
-        width: 500px;
-        height: 480px;
-        float: left;
-    }
+    width: 500px;
+    height: 480px;
+    float: left;
+}

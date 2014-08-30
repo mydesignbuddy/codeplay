@@ -29,7 +29,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">About</a></li>
             <li>
-              <button id="runCode" type="button" class="btn btn-default" onclick="render();">Run</button>
+              <a href="#" id="runCode" onclick="render();">Run</a>
             </li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -39,7 +39,7 @@
 
     <div class="container">
 <div class="row">
-<canvas class="col-md-6" id="stage" width="640" height="480">Your Browser does not support HTML5 Canvas. Please Upgrade!</canvas>
+<canvas class="col-md-6" id="stage" width="500" height="393">Your Browser does not support HTML5 Canvas. Please Upgrade!</canvas>
     
 <div id="editor" class="col-md-6">var centerX = canvas.width / 2;
 var centerY = canvas.height / 2;
@@ -47,10 +47,13 @@ var radius = 70;
 
 drawCircle(centerX, centerY, radius, 'green', 'red', 10);
 
-drawCircle(110, 110, 100, 'red', 'blue', 5);
+drawCircle(120, 110, 100, 'transparent', 'blue', 1);
+
+colors = ['red', 'yellow', 'green', 'blue', 'orange', 'white'];
 
 for(x=0; x<10; x++){
-    drawCircle((40*x)+20, 20, 15, 'yellow', 'blue', 5);
+    fillColorPicker = Math.floor(Math.random() * colors.length);
+    drawCircle((40*x)+20, 20, 15, colors[fillColorPicker], 'transparent', 0);
 }
 
 function drawCircle(x, y, r, fill, stroke, lineWidth){
@@ -70,7 +73,9 @@ function drawCircle(x, y, r, fill, stroke, lineWidth){
 
 
 <!-- Latest compiled and minified JavaScript -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 <script>
 var canvas = document.getElementById('stage');
 var brush = canvas.getContext('2d');
@@ -81,21 +86,45 @@ var brush = canvas.getContext('2d');
     editor.getSession().setUseWrapMode(true);
     editor.getSession().setUseSoftTabs(true);
     
+    $('#editor').height($('#stage').height());
+    editor.getValue()
+    
     render();
     
-    /*editor.getSession().on('change', function(e) {
-      // e.type, etc
-      try {
-        render();
-      } catch(e){
-          //something
-      }
-    });*/
+window.onresize = function(){
+  $('#editor').height($('#stage').height());
+};
     
 function render(){
-    brush.clearRect(0,0,canvas.width,canvas.height);
+    brush.fillStyle="#000";
+    brush.fillRect(0,0,canvas.width,canvas.height);
+    drawGrid(10, "#444", 0.05);
+    drawGrid(50, "#888", 0.25);
     eval(editor.getValue());
 }
+
+
+function drawGrid(size, color, lineWidth){
+  brush.strokeStyle=color;
+  brush.lineWidth=lineWidth;
+  
+  var maxCols = Math.round(canvas.width/size);
+  var maxRows = Math.round(canvas.height/size);
+  console.log('maxCols: '+maxCols+' maxRows: '+maxRows);
+  for(var i=0; i<maxCols; i++){
+    brush.moveTo(size*i,0);
+    brush.lineTo(size*i,canvas.height);
+  }
+  
+  for(var x=0; x<maxRows; x++){
+    brush.moveTo(0,size*x);
+    brush.lineTo(canvas.width,size*x);
+  }
+  
+  brush.stroke();
+}
+
+
 </script>
 </body>
 </html>
